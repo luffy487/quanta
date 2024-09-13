@@ -32,7 +32,7 @@ const MyBorrowAssets: React.FC<props> = ({
         <TableColumn className="text-sm text-gray-500">Collateral</TableColumn>
         <TableColumn className="text-sm text-gray-500">Interest</TableColumn>
         <TableColumn className="text-sm text-gray-500">Borrowed At</TableColumn>
-        <TableColumn>&nbsp;</TableColumn>
+        <TableColumn className="text-sm text-gray-500">Actions</TableColumn>
       </TableHeader>
       <TableBody>
         {Object.keys(tokenBorrows).map((token: string) =>

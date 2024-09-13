@@ -22,7 +22,7 @@ const BorrowAssets: React.FC<Props> = ({ tokensInfo, handleBorrowClick }) => {
         <TableColumn className="text-sm text-gray-500">Available</TableColumn>
         <TableColumn className="text-sm text-gray-500">APR</TableColumn>
         <TableColumn className="text-sm text-gray-500">Collateral</TableColumn>
-        <TableColumn>&nbsp;</TableColumn>
+        <TableColumn className="text-sm text-gray-500">Actions</TableColumn>
       </TableHeader>
       <TableBody>
         {tokensInfo.map((token: TokenInfo) => (

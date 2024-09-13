@@ -24,7 +24,7 @@ const SupplyAssets: React.FC<props> = ({ tokensInfo, handleSupplyClick }) => {
           Total Supply
         </TableColumn>
         <TableColumn className="text-sm text-gray-500">Utilized</TableColumn>
-        <TableColumn>&nbsp;</TableColumn>
+        <TableColumn className="text-sm text-gray-500">Actions</TableColumn>
       </TableHeader>
       <TableBody>
         {tokensInfo.map((token: TokenInfo) => (

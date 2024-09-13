@@ -29,7 +29,7 @@ const MySupplyAssets: React.FC<props> = ({
         <TableColumn className="text-sm text-gray-500">Amount</TableColumn>
         <TableColumn className="text-sm text-gray-500">Interest</TableColumn>
         <TableColumn className="text-sm text-gray-500">Supplied at</TableColumn>
-        <TableColumn>&nbsp;</TableColumn>
+        <TableColumn className="text-sm text-gray-500">Actions</TableColumn>
       </TableHeader>
       <TableBody>
         {Object.keys(tokenSupplies).map((token: any) =>
