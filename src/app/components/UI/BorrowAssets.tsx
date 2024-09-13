@@ -25,13 +25,13 @@ const BorrowAssets: React.FC<Props> = ({ tokensInfo, handleBorrowClick }) => {
         <TableColumn>&nbsp;</TableColumn>
       </TableHeader>
       <TableBody>
-        {tokensInfo.map((token: any) => (
+        {tokensInfo.map((token: TokenInfo) => (
           <TableRow
             key={token.symbol}
             className="border-y-[0.5px] border-gray-800 text-center"
           >
             <TableCell>{token.symbol}</TableCell>
-            <TableCell>{parseFloat(token.available).toFixed(2)}</TableCell>
+            <TableCell>{parseFloat(token.available.toString()).toFixed(2)}</TableCell>
             <TableCell>{Number(token.apr) + "%"}</TableCell>
             <TableCell>
               <Tooltip

@@ -20,12 +20,14 @@ const SupplyAssets: React.FC<props> = ({ tokensInfo, handleSupplyClick }) => {
     <Table aria-label="Token Table">
       <TableHeader>
         <TableColumn className="text-sm text-gray-500">Asset</TableColumn>
-        <TableColumn className="text-sm text-gray-500">Total Supply</TableColumn>
+        <TableColumn className="text-sm text-gray-500">
+          Total Supply
+        </TableColumn>
         <TableColumn className="text-sm text-gray-500">Utilized</TableColumn>
         <TableColumn>&nbsp;</TableColumn>
       </TableHeader>
       <TableBody>
-        {tokensInfo.map((token: any) => (
+        {tokensInfo.map((token: TokenInfo) => (
           <TableRow
             key={token.symbol}
             className="border-y-[0.5px] border-gray-800 text-center"
@@ -39,7 +41,9 @@ const SupplyAssets: React.FC<props> = ({ tokensInfo, handleSupplyClick }) => {
                 {token.symbol}
               </Tooltip>
             </TableCell>
-            <TableCell>{parseFloat(token.total).toFixed(2)}</TableCell>
+            <TableCell>
+              {parseFloat(token.total.toString()).toFixed(2)}
+            </TableCell>
             <TableCell>
               <Tooltip
                 showArrow={true}
@@ -50,7 +54,7 @@ const SupplyAssets: React.FC<props> = ({ tokensInfo, handleSupplyClick }) => {
                 }
                 className="p-2 bg-black text-gray-500 rounded-lg text-sm"
               >
-                {parseFloat(token.utilized).toFixed(2)}
+                {parseFloat(token.utilized.toString()).toFixed(2)}
               </Tooltip>
             </TableCell>
             <TableCell>
