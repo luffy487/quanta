@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Quanta - Decentralized Ethereum Lending and Borrowing Platform
 
-## Getting Started
+Quanta is a decentralized platform built on the Ethereum blockchain that allows users to lend and borrow crypto assets. The platform supports four crypto tokens: **REACT**, **NODE**, **VUE**, and **NEXT**. Quanta ensures fair and simple interest rates, with fixed yields for lenders and a dynamic interest model for borrowers based on the platform's utilization rate.
 
-First, run the development server:
+## Key Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Lend & Earn**: Lenders earn a fixed 5% annual yield on the assets they provide to the platform.
+  
+- **Borrow & Collateralize**: Borrowers can access liquidity by using any three of the supported tokens as collateral at a 150% ratio. Interest rates for borrowers are based on a combination of base interest and utilization rate.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Interest Calculation**: 
+  - Borrowers pay interest calculated using a fixed base interest of 2%, plus an additional percentage determined by the platform's utilization rate. This dynamic rate ensures fair pricing based on asset demand.
+  
+- **Supported Tokens**: 
+  - REACT, NODE, VUE, and NEXT tokens are the assets available for lending and borrowing, with equal value for each.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Utilization Rate and Interest Model
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The borrower’s interest rate is determined by the platform's utilization rate, calculated as follows:
 
-## Learn More
+- **Base interest rate**: 2%
+- **Utilization brackets**:
+  - < 20%: Interest = Base interest + Utilization × 0.2
+  - 20-40%: Interest = Base interest + Utilization × 0.4
+  - 40-60%: Interest = Base interest + Utilization × 0.6
+  - 60-80%: Interest = Base interest + Utilization × 0.8
+  - > 80%: Interest = Base interest + Utilization
 
-To learn more about Next.js, take a look at the following resources:
+## Technologies Used
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Next.js**: Frontend framework for building fast and efficient user interfaces.
+- **Tailwind CSS**: For a sleek, responsive, and customizable design.
+- **Web3.js**: To interact with the Ethereum blockchain.
+- **Solidity**: For writing the smart contracts that power the lending and borrowing logic.
+- **MetaMask**: For secure wallet integration, allowing users to connect, lend, and borrow assets directly from their wallets.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## How to Use
 
-## Deploy on Vercel
+1. **Install MetaMask**: Make sure you have MetaMask installed and connected to the Ethereum network.
+2. **Lend**: Deposit any of the supported tokens into the platform to earn a fixed 5% annual yield.
+3. **Borrow**: Borrow tokens by providing other assets as collateral. Interest is calculated based on the platform's utilization rate.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Smart Contract
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Contract Address**: [0xYourContractAddressHere](https://etherscan.io/address/0xYourContractAddressHere)
+- **GitHub Repository**: [Smart Contract Code](https://github.com/luffy487/DeFi)
+
+## Future Improvements
+
+- Dynamic risk assessment for collateral
+- Additional token support
+- Multi-chain support for other blockchains
+
+## License
+
+This project is open-sourced under the MIT license.
