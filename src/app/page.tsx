@@ -51,10 +51,10 @@ export default function Home() {
     try {
       factory = fetchContract(FACTORY_ADDRESS, FACTORY_ABI);
       deFi = fetchContract(DEFI_ADDRESS, DEFI_ABI);
-      let allTokens = await factory.methods.getAllTokens().call();
+      const allTokens = await factory.methods.getAllTokens().call();
       await Promise.all(
         allTokens.map(async (token: string) => {
-          let pool = await factory.methods.getTokenPoolAddress(token).call();
+          const pool = await factory.methods.getTokenPoolAddress(token).call();
           tokenContracts[token] = fetchContract(token, TOKEN_ABI);
           poolContracts[pool] = fetchContract(pool, POOL_ABI);
           tokensNPoolsAddress[token] = pool;
@@ -76,7 +76,7 @@ export default function Home() {
   };
   const getTokenBorrows = async () => {
     try {
-      let borrows: any = {};
+      const borrows: any = {};
       await Promise.all(
         Object.keys(tokenContracts).map(async (token: string) => {
           borrows[token] = await deFi.methods
@@ -91,10 +91,10 @@ export default function Home() {
   };
   const getTokenSupplies = async () => {
     try {
-      let supplies: any = {};
+      const supplies: any = {};
       await Promise.all(
         Object.keys(tokenContracts).map(async (token: string) => {
-          let tokenSupplies = await deFi.methods
+          const tokenSupplies = await deFi.methods
             .getUserDeposits(walletAddress, token)
             .call();
           supplies[token] = tokenSupplies.filter(
@@ -109,11 +109,11 @@ export default function Home() {
   };
   const getTokenInfo = async () => {
     try {
-      let tokenInfo: any = await Promise.all(
+      const tokenInfo: any = await Promise.all(
         Object.keys(tokensNPoolsAddress).map(async (token: string) => {
-          let pool = poolContracts[tokensNPoolsAddress[token]];
-          let tokenContract = tokenContracts[token];
-          let [symbol, name, apr, total, utilized, available]: [
+          const pool = poolContracts[tokensNPoolsAddress[token]];
+          const tokenContract = tokenContracts[token];
+          const [symbol, name, apr, total, utilized, available]: [
             string,
             string,
             number,
@@ -146,7 +146,7 @@ export default function Home() {
   };
   const calculateBalance = async () => {
     try {
-      let balances: any = {};
+      const balances: any = {};
       await Promise.all(
         Object.keys(tokenContracts).map(async (token: string) => {
           balances[token] = await tokenContracts[token].methods
@@ -154,7 +154,6 @@ export default function Home() {
             .call();
         })
       );
-      console.log("balances");
       setBalance(balances);
     } catch (err) {
       console.log("calculateBalance", err);
@@ -170,7 +169,7 @@ export default function Home() {
         toast.error("Please select collateral asset");
         return;
       }
-      let tokenInfo = tokensInfo.find((tkn: any) => tkn.token == currentToken);
+      const tokenInfo = tokensInfo.find((tkn: any) => tkn.token == currentToken);
       if (amount > tokenInfo.available) {
         toast.error("Please enter amount less than available");
         return;
@@ -219,7 +218,7 @@ export default function Home() {
   };
   const repay = async (token: string, index: number) => {
     try {
-      let amount = interest(tokenBorrows[token][index]);
+      const amount = interest(tokenBorrows[token][index]);
       await tokenContracts[token].methods
         .approve(tokensNPoolsAddress[token], amount)
         .send({ from: walletAddress });
@@ -232,7 +231,7 @@ export default function Home() {
     }
   };
   const interest = (info: any) => {
-    let duration =
+    const duration =
       (new Date().getTime() -
         new Date(convertedDate(info.timestamp)).getTime()) /
       msInADay;
@@ -255,7 +254,7 @@ export default function Home() {
     setShowSupply(true);
   };
   const handleBorrowClick = (token: string) => {
-    let tokenInfo = tokensInfo.find((tkn: any) => tkn.token == token);
+    const tokenInfo = tokensInfo.find((tkn: any) => tkn.token == token);
     if (!tokenInfo.available) {
       toast.warning("Unavailable Asset");
       return;
@@ -265,7 +264,7 @@ export default function Home() {
   };
 
   const getToken = (token: string) => {
-    let tokenInfo: any = tokensInfo.find((tkn: any) => tkn.token == token);
+    const tokenInfo: any = tokensInfo.find((tkn: any) => tkn.token == token);
     return tokenInfo;
   };
   return (
