@@ -49,7 +49,7 @@ const About = () => {
             three other supported tokens. Borrowers pay a simple interest rate
             based on a fixed base interest rate of{" "}
             <span className="font-bold">2%</span>, adjusted dynamically by the
-            platform's utilization rate.
+            platform&apos;s utilization rate.
           </p>
         </section>
 
