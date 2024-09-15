@@ -10,9 +10,9 @@ import {
   Tooltip,
 } from "@nextui-org/react";
 import { WEItoETH, convertedDate } from "@/utils/helper";
-import { Supply } from "@/utils/interfaces";
+import { Supply, TokenSupplies } from "@/utils/interfaces";
 interface props {
-  tokenSupplies: any;
+  tokenSupplies: TokenSupplies;
   withdraw: (token: string, amount: number) => void;
   getToken: (token: string) => any;
   interest: (info: any) => number;
@@ -33,7 +33,7 @@ const MySupplyAssets: React.FC<props> = ({
         <TableColumn className="text-sm text-gray-500">Actions</TableColumn>
       </TableHeader>
       <TableBody>
-        {Object.keys(tokenSupplies).map((token: string) =>
+        {Object.keys(tokenSupplies).flatMap((token: string) =>
           tokenSupplies[token].map((supply: Supply, index: number) => (
             <TableRow
               key={token}

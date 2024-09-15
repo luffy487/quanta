@@ -11,9 +11,10 @@ import {
   Tooltip,
 } from "@nextui-org/react";
 import { WEItoETH, convertedDate } from "@/utils/helper";
+import { Borrow, TokenBorrows } from "@/utils/interfaces";
 
 interface props {
-  tokenBorrows: any;
+  tokenBorrows: TokenBorrows;
   getToken: (token: string) => any;
   repay: (token: string, index: number) => void;
   interest: (info: any) => number;
@@ -35,8 +36,8 @@ const MyBorrowAssets: React.FC<props> = ({
         <TableColumn className="text-sm text-gray-500">Actions</TableColumn>
       </TableHeader>
       <TableBody>
-        {Object.keys(tokenBorrows).map((token: string) =>
-          tokenBorrows[token].map((borrow: any, index: number) => (
+        {Object.keys(tokenBorrows).flatMap((token: string) =>
+          tokenBorrows[token].map((borrow: Borrow, index: number) => (
             <TableRow
               key={index}
               className="border-y-[0.5px] border-gray-800 text-center"
@@ -58,10 +59,12 @@ const MyBorrowAssets: React.FC<props> = ({
                       </div>
                     }
                   >
-                    {parseFloat(borrow.interest).toFixed(2) + "%"}
+                    {parseFloat(borrow.interest.toString()).toFixed(2) + "%"}
                   </Tooltip>
                 ) : (
-                  <div>{parseFloat(borrow.interest).toFixed(2) + "%"}</div>
+                  <div>
+                    {parseFloat(borrow.interest.toString()).toFixed(2) + "%"}
+                  </div>
                 )}
               </TableCell>
               <TableCell className="text-xs">

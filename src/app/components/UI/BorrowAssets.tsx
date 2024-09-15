@@ -43,8 +43,8 @@ const BorrowAssets: React.FC<Props> = ({ tokensInfo, handleBorrowClick }) => {
                     </div>
                     <div className="my-2 space-y-1">
                       {tokensInfo
-                        .filter((tkn: any) => tkn.token != token.token)
-                        .map((tkn: any, index: number) => (
+                        .filter((tkn: TokenInfo) => tkn.token != token.token)
+                        .map((tkn: TokenInfo, index: number) => (
                           <div
                             className="text-xs text-gray-500 font-semibold"
                             key={index}

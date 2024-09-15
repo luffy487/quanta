@@ -21,7 +21,7 @@ import SupplyAssets from "./components/UI/SupplyAssets";
 import MyBorrowAssets from "./components/UI/MyBorrowAssets";
 import BorrowAssets from "./components/UI/BorrowAssets";
 import { toast } from "react-toastify";
-import { TokenInfo } from "@/utils/interfaces";
+import { TokenBorrows, TokenInfo, TokenSupplies } from "@/utils/interfaces";
 
 const tokensNPoolsAddress: any = {};
 let deFi: any, factory: any;
@@ -31,15 +31,15 @@ const msInADay: number = 1000 * 60 * 60 * 24;
 export default function Home() {
   const { walletAddress } = useWallet();
   const [balance, setBalance] = useState<any>({});
-  const [tokensInfo, setTokensInfo] = useState<any>([]);
+  const [tokensInfo, setTokensInfo] = useState<TokenInfo[]>([]);
   const [showSupply, setShowSupply] = useState<boolean>(false);
   const [showBorrow, setShowBorrow] = useState<boolean>(false);
   const [currentToken, setCurrentToken] = useState<string>("");
   const [amount, setAmount] = useState<number>(0);
   const [buttonLoading, setButtonLoading] = useState<boolean>(false);
   const [buttonLoadingText, setButtonLoadingText] = useState<string>("");
-  const [tokenBorrows, setTokenBorrows] = useState<any>({});
-  const [tokenSupplies, setTokenSupplies] = useState<any>({});
+  const [tokenBorrows, setTokenBorrows] = useState<TokenBorrows>({});
+  const [tokenSupplies, setTokenSupplies] = useState<TokenSupplies>({});
   const [collateralToken, setCollateralToken] = useState<string>("");
   useEffect(() => {
     getNecessaryInfo();
@@ -76,12 +76,21 @@ export default function Home() {
   };
   const getTokenBorrows = async () => {
     try {
-      const borrows: any = {};
+      const borrows: TokenBorrows = {};
       await Promise.all(
         Object.keys(tokenContracts).map(async (token: string) => {
-          borrows[token] = await deFi.methods
+          const tokenBorrows = await deFi.methods
             .getUserLoans(walletAddress, token)
             .call();
+          borrows[token] = tokenBorrows.map((tBorrow: any) => {
+            return {
+              amount: tBorrow.amount,
+              timestamp: tBorrow.timestamp,
+              cToken: tBorrow.collateral,
+              paid: tBorrow.paid,
+              interest: tBorrow.interest,
+            };
+          });
         })
       );
       setTokenBorrows(borrows);
@@ -91,15 +100,21 @@ export default function Home() {
   };
   const getTokenSupplies = async () => {
     try {
-      const supplies: any = {};
+      const supplies: TokenSupplies = {};
       await Promise.all(
         Object.keys(tokenContracts).map(async (token: string) => {
           const tokenSupplies = await deFi.methods
             .getUserDeposits(walletAddress, token)
             .call();
-          supplies[token] = tokenSupplies.filter(
-            (tSupply: any) => !tSupply.withdrawn
-          );
+          supplies[token] = tokenSupplies
+            .filter((tSupply: any) => !tSupply.withdrawn)
+            .map((tSupply: any) => {
+              return {
+                amount: tSupply.amount,
+                timestamp: tSupply.timestamp,
+                withdrawn: tSupply.withdrawn,
+              };
+            });
         })
       );
       setTokenSupplies(supplies);
@@ -169,7 +184,7 @@ export default function Home() {
         toast.error("Please select collateral asset");
         return;
       }
-      const tokenInfo: TokenInfo = tokensInfo.find(
+      const tokenInfo: any = tokensInfo.find(
         (tkn: TokenInfo) => tkn.token == currentToken
       );
       if (amount > tokenInfo.available) {
@@ -255,7 +270,9 @@ export default function Home() {
     setShowSupply(true);
   };
   const handleBorrowClick = (token: string) => {
-    const tokenInfo: TokenInfo = tokensInfo.find((tkn: TokenInfo) => tkn.token == token);
+    const tokenInfo: any = tokensInfo.find(
+      (tkn: TokenInfo) => tkn.token == token
+    );
     if (!tokenInfo.available) {
       toast.warning("Unavailable Asset");
       return;
@@ -265,8 +282,7 @@ export default function Home() {
   };
 
   const getToken = (token: string) => {
-    const tokenInfo: TokenInfo = tokensInfo.find((tkn: TokenInfo) => tkn.token == token);
-    return tokenInfo;
+    return tokensInfo.find((tkn: TokenInfo) => tkn.token == token);
   };
   return (
     <div className="px-20 py-5">
@@ -357,7 +373,7 @@ export default function Home() {
                 onClick={() => supply(amount)}
                 isLoading={buttonLoading}
               >
-                {!buttonLoading ? "Approve & Supply" : buttonLoadingText}
+                {!buttonLoading ? "Approve and Supply" : buttonLoadingText}
               </Button>
             </div>
           </div>
@@ -417,7 +433,7 @@ export default function Home() {
                 onClick={() => borrow(amount)}
                 isLoading={buttonLoading}
               >
-                {!buttonLoading ? "Approve & Borrow" : buttonLoadingText}
+                {!buttonLoading ? "Approve and Borrow" : buttonLoadingText}
               </Button>
             </div>
           </div>

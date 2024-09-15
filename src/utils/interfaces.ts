@@ -22,9 +22,10 @@ export interface TokenBorrows {
 
 export interface Borrow {
   amount: number;
-  timestamp: string;
-  collateral: string;
-  paid: boolean
+  timestamp: number;
+  cToken: string;
+  paid: boolean;
+  interest : number;
 }
 
 export interface Supply {
@@ -36,11 +37,4 @@ export interface Supply {
 export interface TokenProps {
   tokensInfo: TokenInfo[];
   handleSupplyClick: (token: string) => void;
-}
-
-export interface MyAssetsProps {
-  tokenSupplies: TokenSupplies;
-  tokenBorrows: TokenBorrows;
-  withdraw: (token: string, amount: number) => void;
-  repay: (token: string, index: number) => void;
 }
