@@ -19,7 +19,7 @@ const WEItoETH = (wei: number) => {
   return Number(wei) / 10 ** 18;
 };
 
-const convertedDate = (timestamp: any) => {
+const convertedDate = (timestamp: number) => {
   const date = new Date(Number(timestamp) * 1000);
   return date.toLocaleString();
 };

@@ -13,7 +13,7 @@ export interface TokenInfo {
 }
 
 export interface TokenSupplies {
-  [token: string]: number;
+  [token: string]: Supply[];
 }
 
 export interface TokenBorrows {
@@ -24,6 +24,13 @@ export interface Borrow {
   amount: number;
   timestamp: string;
   collateral: string;
+  paid: boolean
+}
+
+export interface Supply {
+  amount : number;
+  timestamp : number;
+  withdrawn : boolean;
 }
 
 export interface TokenProps {

@@ -21,11 +21,11 @@ import SupplyAssets from "./components/UI/SupplyAssets";
 import MyBorrowAssets from "./components/UI/MyBorrowAssets";
 import BorrowAssets from "./components/UI/BorrowAssets";
 import { toast } from "react-toastify";
+import { TokenInfo } from "@/utils/interfaces";
 
-let tokensNPoolsAddress: any = {},
-  deFi: any,
-  factory: any,
-  tokenContracts: any = {},
+const tokensNPoolsAddress: any = {};
+let deFi: any, factory: any;
+const tokenContracts: any = {},
   poolContracts: any = {};
 const msInADay: number = 1000 * 60 * 60 * 24;
 export default function Home() {
@@ -109,7 +109,7 @@ export default function Home() {
   };
   const getTokenInfo = async () => {
     try {
-      const tokenInfo: any = await Promise.all(
+      const tokenInfo: TokenInfo[] = await Promise.all(
         Object.keys(tokensNPoolsAddress).map(async (token: string) => {
           const pool = poolContracts[tokensNPoolsAddress[token]];
           const tokenContract = tokenContracts[token];
@@ -169,7 +169,9 @@ export default function Home() {
         toast.error("Please select collateral asset");
         return;
       }
-      const tokenInfo = tokensInfo.find((tkn: any) => tkn.token == currentToken);
+      const tokenInfo: TokenInfo = tokensInfo.find(
+        (tkn: TokenInfo) => tkn.token == currentToken
+      );
       if (amount > tokenInfo.available) {
         toast.error("Please enter amount less than available");
         return;
@@ -226,7 +228,6 @@ export default function Home() {
       toast.success("Repaid succesfully !");
       await getNecessaryInfo();
     } catch (err: any) {
-      console.log("err", err);
       toast.error(err.message);
     }
   };
@@ -254,7 +255,7 @@ export default function Home() {
     setShowSupply(true);
   };
   const handleBorrowClick = (token: string) => {
-    const tokenInfo = tokensInfo.find((tkn: any) => tkn.token == token);
+    const tokenInfo: TokenInfo = tokensInfo.find((tkn: TokenInfo) => tkn.token == token);
     if (!tokenInfo.available) {
       toast.warning("Unavailable Asset");
       return;
@@ -264,16 +265,14 @@ export default function Home() {
   };
 
   const getToken = (token: string) => {
-    const tokenInfo: any = tokensInfo.find((tkn: any) => tkn.token == token);
+    const tokenInfo: TokenInfo = tokensInfo.find((tkn: TokenInfo) => tkn.token == token);
     return tokenInfo;
   };
   return (
     <div className="px-20 py-5">
       <div>
         <Card>
-          <span className="text-customGreen">
-            Wallet Balance
-          </span>
+          <span className="text-customGreen">Wallet Balance</span>
           <div className="flex space-x-3 items-end py-1">
             {Object.keys(balance).map((token: string) => (
               <Card className="bg-customBlack rounded-lg px-4 py-2" key={token}>
