@@ -1,4 +1,4 @@
-import { Mulish } from "@next/font/google";
+import { Mulish } from "next/font/google";
 import "./globals.css";
 import TopBar from "./components/Layout/TopBar";
 import { WalletProvider } from "./components/UI/WalletContextProvider";

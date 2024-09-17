@@ -1,5 +1,5 @@
-const DEFI_ADDRESS = "0x0DCd1Bf9A1b36cE34237eEaFef220932846BCD82";
-const FACTORY_ADDRESS = "0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6";
+const DEFI_ADDRESS = "0x56fA95C8935E9d865FaAed514E28bC9c1D9314A0";
+const FACTORY_ADDRESS = "0x1F8FD6032C0d7319c86529aF0dC5901E951Ac1E3";
 
 const TOKEN_ABI = [
   {
@@ -194,6 +194,7 @@ const POOL_ABI = [
     inputs: [
       { name: "user", type: "address", internalType: "address" },
       { name: "amount", type: "uint256", internalType: "uint256" },
+      { name: "repay", type: "bool", internalType: "bool" },
     ],
     outputs: [],
     stateMutability: "nonpayable",
@@ -204,16 +205,6 @@ const POOL_ABI = [
     inputs: [],
     outputs: [{ name: "", type: "address", internalType: "address" }],
     stateMutability: "view",
-  },
-  {
-    type: "function",
-    name: "takeLoan",
-    inputs: [
-      { name: "user", type: "address", internalType: "address" },
-      { name: "amount", type: "uint256", internalType: "uint256" },
-    ],
-    outputs: [],
-    stateMutability: "nonpayable",
   },
   {
     type: "function",
@@ -242,6 +233,7 @@ const POOL_ABI = [
     inputs: [
       { name: "user", type: "address", internalType: "address" },
       { name: "amount", type: "uint256", internalType: "uint256" },
+      { name: "loan", type: "bool", internalType: "bool" },
     ],
     outputs: [],
     stateMutability: "nonpayable",
@@ -510,7 +502,10 @@ const FACTORY_ABI = [
   {
     type: "function",
     name: "createPool",
-    inputs: [{ name: "_token", type: "address", internalType: "address" }],
+    inputs: [
+      { name: "_token", type: "address", internalType: "address" },
+      { name: "_pool", type: "address", internalType: "contract Pool" },
+    ],
     outputs: [{ name: "", type: "address", internalType: "contract Pool" }],
     stateMutability: "nonpayable",
   },
