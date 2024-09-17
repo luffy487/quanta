@@ -42,7 +42,7 @@ The borrower’s interest rate is determined by the platform's utilization rate,
 
 ## Smart Contract
 
-- **Contract Address**: [0xYourContractAddressHere](https://etherscan.io/address/0xYourContractAddressHere)
+- **Contract**: [Quanta](https://sepolia.etherscan.io/address/0x56fA95C8935E9d865FaAed514E28bC9c1D9314A0)
 - **GitHub Repository**: [Smart Contract Code](https://github.com/luffy487/DeFi)
 
 ## Future Improvements
