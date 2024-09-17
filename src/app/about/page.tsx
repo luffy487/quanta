@@ -30,43 +30,43 @@ const About = () => {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="container mx-auto px-6 py-10 rounded-lg shadow-lg text-gray-300">
+    <div className="container mx-auto px-[250px] py-4">
+      <div className="container mx-auto rounded-lg shadow-lg text-gray-400">
         <section className="mb-10">
-          <p className="text-xl">
-            <strong className="text-2xl">Quanta</strong> is a decentralized Ethereum-based lending
+          <p className="text-[16px]">
+            <span className="text-[18px] text-white">Quanta</span> is a decentralized Ethereum-based lending
             and borrowing platform. It allows users to lend and borrow four
             supported crypto tokens:{" "}
-            <strong className="text-customGreen">REACT</strong>,{" "}
-            <strong className="text-customGreen">NODE</strong>,{" "}
-            <strong className="text-customGreen">VUE</strong>, and{" "}
-            <strong className="text-customGreen">NEXT</strong>.
+            <span className="text-white">REACT</span>,{" "}
+            <span className="text-white">NODE</span>,{" "}
+            <span className="text-white">VUE</span>, and{" "}
+            <span className="text-white">NEXT</span>.
           </p>
-          <p className="text-xl leading-relaxed mt-6">
+          <p className="text-[16px] leading-relaxed mt-6">
             Lenders earn a fixed annual yield of{" "}
-            <span className="font-bold">5%</span> on their deposits, while
+            <span className="text-white">5%</span> on their deposits, while
             borrowers can access liquidity by providing collateral in any of the
             three other supported tokens. Borrowers pay a simple interest rate
             based on a fixed base interest rate of{" "}
-            <span className="font-bold">2%</span>, adjusted dynamically by the
+            <span className="text-white">2%</span>, adjusted dynamically by the
             platform&apos;s utilization rate.
           </p>
         </section>
 
         <section className="mb-10">
-          <h2 className="text-3xl font-bold mb-4">How It Works</h2>
-          <ul className="list-disc list-inside text-xl space-y-4">
+          <h2 className="text-[20px] mb-4 text-white">How It Works</h2>
+          <ul className="list-disc list-inside text-[16px] space-y-4">
             <li>
-              <strong>Lenders:</strong> Earn 5% annual yield on their deposits
+              <span className="text-white">Lenders:</span> Earn 5% annual yield on their deposits
               in one of the supported tokens.
             </li>
             <li>
-              <strong>Borrowers:</strong> Can borrow tokens by providing
-              collateral worth <strong>150%</strong> of the borrowed amount.
+              <span className="text-white">Borrowers:</span> Can borrow tokens by providing
+              collateral worth <span>150%</span> of the borrowed amount.
             </li>
             <li>
-              <strong>Interest for Borrowers:</strong> Interest is calculated as
-              a <strong className="font-bold">2%</strong> base interest plus an
+              <span className="text-white">Interest for Borrowers:</span> Interest is calculated as
+              a <span className="font-bold">2%</span> base interest plus an
               additional rate based on the platform’s utilization.
             </li>
           </ul>
@@ -75,7 +75,7 @@ const About = () => {
       </div>
 
       <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-6 text-center">
+        <h2 className="text-[20px] mb-6 text-white">
           Advantages of Quanta
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -84,8 +84,8 @@ const About = () => {
               key={index}
               className="rounded-lg p-6 shadow-lg bg-customBlack"
             >
-              <h3 className="text-xl font-semibold mb-4">{advantage.title}</h3>
-              <p className="text-lg text-gray-400">{advantage.description}</p>
+              <h3 className="text-[18px]  mb-4">{advantage.title}</h3>
+              <p className="text-[16px] text-gray-400">{advantage.description}</p>
             </div>
           ))}
         </div>

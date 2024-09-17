@@ -292,10 +292,10 @@ export default function Home() {
           <div className="flex space-x-3 items-end py-1">
             {Object.keys(balance).map((token: string) => (
               <Card className="bg-customBlack rounded-lg px-4 py-2" key={token}>
-                <span className="text-sm text-gray-400">
+                <span className="text-sm text-white">
                   {getToken(token)?.name}
                 </span>
-                <span className="text-lg text-gray-500">
+                <span className="text-md text-gray-500">
                   {WEItoETH(balance[token]) + " " + getToken(token)?.symbol}
                 </span>
               </Card>
